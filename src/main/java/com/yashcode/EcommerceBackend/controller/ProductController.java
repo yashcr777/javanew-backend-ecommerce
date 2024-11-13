@@ -29,6 +29,7 @@ import static org.springframework.http.HttpStatus.*;
 public class ProductController {
     private final IProductService productService;
     private final ProductClient client;
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/all")
     public ResponseEntity<ApiResponse>getAllProducts(){
         try {
