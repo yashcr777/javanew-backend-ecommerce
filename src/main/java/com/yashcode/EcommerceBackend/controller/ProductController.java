@@ -9,6 +9,7 @@ import com.yashcode.EcommerceBackend.entity.Product;
 import com.yashcode.EcommerceBackend.entity.Products;
 import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
 import com.yashcode.EcommerceBackend.response.ApiResponse;
+import com.yashcode.EcommerceBackend.service.ProductClient.ProductClient;
 import com.yashcode.EcommerceBackend.service.product.IProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ import static org.springframework.http.HttpStatus.*;
 @RequestMapping("${api.prefix}/products")
 public class ProductController {
     private final IProductService productService;
-
+    private final ProductClient client;
     @GetMapping("/all")
     public ResponseEntity<ApiResponse>getAllProducts(){
         try {
@@ -80,65 +81,64 @@ public class ProductController {
 //            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
 //        }
 //    }
-//    @GetMapping("/products/by/brand-and-name")
-//    public ResponseEntity<ApiResponse>getProductsByBrandAndName(@RequestParam String brandName,@RequestParam String productName)
-//    {
-//        try {
-//            List<Product>products=productService.getProductsByBrandAndName(brandName,productName);
-//            if(products.isEmpty())
-//            {
-//                return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("No products with this brand name and product name",null));
-//            }
+    @GetMapping("/products/by/brand-and-name")
+    public ResponseEntity<ApiResponse>getProductsByBrandAndName(@RequestParam String brandName,@RequestParam String productName)
+    {
+        try {
+            List<Products>products=productService.getProductsByBrandAndName(brandName,productName);
+            if(products==null)
+            {
+                return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("No products with this brand name and product name",null));
+            }
 //            List<ProductDto>convertedProducts=productService.getConvertedProducts(products);
-//            return ResponseEntity.ok(new ApiResponse("Success",convertedProducts));
-//        } catch (ResourceNotFoundException e) {
-//            return ResponseEntity.ok(new ApiResponse(e.getMessage(),null));
-//        }
-//    }
-//    @GetMapping("/products/by/category-and-name")
-//    public ResponseEntity<ApiResponse>getProductsByCategoryAndBrand(@RequestParam String category,@RequestParam String brandName)
-//    {
-//        try {
-//            List<Product>products=productService.getProductsByCategoryAndBrand(category,brandName);
-//            if(products.isEmpty())
-//            {
-//                return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("No products with given category name and brand name",null));
-//            }
+            return ResponseEntity.ok(new ApiResponse("Success",products));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.ok(new ApiResponse(e.getMessage(),null));
+        }
+    }
+    @GetMapping("/products/by/category-and-name")
+    public ResponseEntity<ApiResponse>getProductsByCategoryAndBrand(@RequestParam String category,@RequestParam String brandName)
+    {
+        try {
+            List<Products>products=productService.getProductByCategoryAndBrandName(category,brandName);
+            if(products==null)
+            {
+                return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("No products with given category name and brand name",null));
+            }
 //            List<ProductDto>convertedProducts=productService.getConvertedProducts(products);
-//            return ResponseEntity.ok(new ApiResponse("Success",convertedProducts));
-//        } catch (ResourceNotFoundException e) {
-//            return ResponseEntity.ok(new ApiResponse(e.getMessage(),null));
-//        }
-//    }
-//    @GetMapping("/products/by/name")
-//    public ResponseEntity<ApiResponse>getProductsByName(@RequestParam String name)
-//    {
-//        try {
-//            List<Product>products=productService.getProductsByName(name);
-//            if(products.isEmpty())
-//            {
-//                return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("No products with given name",null));
-//            }
-//            List<ProductDto>convertedProducts=productService.getConvertedProducts(products);
-//            return ResponseEntity.ok(new ApiResponse("Success",convertedProducts));
-//        } catch (ResourceNotFoundException e) {
-//            return ResponseEntity.ok(new ApiResponse(e.getMessage(),null));
-//        }
-//    }
-//    @GetMapping("/products/by/brand-name")
-//    public ResponseEntity<ApiResponse>getProductsByBrandName(@RequestParam String brandName)
-//    {
-//        try {
-//            List<Product>products=productService.getProductsByBrand(brandName);
-//            if(products.isEmpty()){
-//                return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("No products with given brand name",null));
-//            }
-//            List<ProductDto>convertedProducts=productService.getConvertedProducts(products);
-//            return ResponseEntity.ok(new ApiResponse("Success",convertedProducts));
-//        } catch (ResourceNotFoundException e) {
-//            return ResponseEntity.ok(new ApiResponse(e.getMessage(),null));
-//        }
-//    }
+            return ResponseEntity.ok(new ApiResponse("Success",products));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.ok(new ApiResponse(e.getMessage(),null));
+        }
+    }
+    @GetMapping("/products/by/name")
+    public ResponseEntity<ApiResponse>getProductsByName(@RequestParam String name)
+    {
+        try {
+            Products products=productService.getProductsByName(name);
+            if(products==null)
+            {
+                return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("No products with given name",null));
+            }
+
+            return ResponseEntity.ok(new ApiResponse("Success",products));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.ok(new ApiResponse(e.getMessage(),null));
+        }
+    }
+    @GetMapping("/products/by/brand-name")
+    public ResponseEntity<ApiResponse>getProductsByBrandName(@RequestParam String brandName)
+    {
+        try {
+            List<Products>products=client.getProductByBrandName(brandName);
+            if(products.isEmpty()){
+                return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("No products with given brand name",null));
+            }
+            return ResponseEntity.ok(new ApiResponse("Success",products));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.ok(new ApiResponse(e.getMessage(),null));
+        }
+    }
 //    @GetMapping("/product/count/by-brand/and-name")
 //    public ResponseEntity<ApiResponse>countProductByBrandNameAndName(@RequestParam String brand,@RequestParam String name)
 //    {

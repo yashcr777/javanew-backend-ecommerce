@@ -121,18 +121,36 @@ public class ProductService implements IProductService {
             throw new ResourceNotFoundException(e.getMessage());
         }
     }
+    @Override
+    public List<Products> getProductsByBrandAndName(String brand, String name) {
+        return pro.getProductByBrandAndName(brand,name);
+    }
+
+    @Override
+    public Products getProductsByName(String name) {
+        try {
+            return pro.getProductName(name);
+        }
+        catch(ResourceNotFoundException e){
+            log.info("Product with given name is not present");
+            throw new ResourceNotFoundException("Product not found!");
+        }
+    }
+    @Override
+    public List<Products> getProductByCategoryAndBrandName(String category,String brandName) {
+        try {
+            return pro.getProductByCategoryBrandAndName(category,brandName);
+        }
+        catch (ResourceNotFoundException e){
+            log.info("There is not product with the given category name!");
+            throw new ResourceNotFoundException(e.getMessage());
+        }
+    }
 }
 
-//    @Override
-//    public List<Product> getProductByCategory(String category) {
-//        try {
-//            return productRepository.findByCategoryName(category);
-//        }
-//        catch (ResourceNotFoundException e){
-//            log.info("There is not product with the given category name!");
-//            throw new ResourceNotFoundException(e.getMessage());
-//        }
-//    }
+
+
+
 //
 //    @Override
 //    public List<Product> getProductsByBrand(String brand) {
@@ -156,21 +174,9 @@ public class ProductService implements IProductService {
 //        }
 //    }
 //
-//    @Override
-//    public List<Product> getProductsByName(String name) {
-//        try {
-//            return productRepository.findByName(name);
-//        }
-//        catch(ResourceNotFoundException e){
-//            log.info("Product with given name is not present");
-//            throw new ResourceNotFoundException("Product not found!");
-//        }
-//    }
+
 //
-//    @Override
-//    public List<Product> getProductsByBrandAndName(String brand, String name) {
-//        return productRepository.findByBrandAndName(brand,name);
-//    }
+
 //
 //    @Override
 //    public Long countProductsByBrandAndName(String brand, String name) {

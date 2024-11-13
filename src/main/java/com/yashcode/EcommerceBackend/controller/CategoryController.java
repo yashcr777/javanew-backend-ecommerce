@@ -2,6 +2,7 @@ package com.yashcode.EcommerceBackend.controller;
 
 
 import com.yashcode.EcommerceBackend.entity.Category;
+import com.yashcode.EcommerceBackend.exceptions.AlreadyExistException;
 import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
 import com.yashcode.EcommerceBackend.response.ApiResponse;
 import com.yashcode.EcommerceBackend.service.category.ICategoryService;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,25 +21,25 @@ public class CategoryController {
     private final ICategoryService categoryService;
 
 
-//    @GetMapping("/all")
-//    public ResponseEntity<ApiResponse> getAllCategories()
-//    {
-//        try {
-//            List<Category> categoryList=categoryService.getAllCategories();
-//            return ResponseEntity.ok(new ApiResponse("Found",categoryList));
-//        } catch (ResourceNotFoundException e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse("Error",null));
-//        }
-//    }
-//    @PostMapping("/add")
-//    public ResponseEntity<ApiResponse>createCategory(@RequestBody Category name){
-//        try {
-//            Category category=categoryService.addCategory(name);
-//            return ResponseEntity.ok(new ApiResponse("Success",category));
-//        } catch (AlreadyExistException e) {
-//            return ResponseEntity.status(CONFLICT).body(new ApiResponse(e.getMessage(),null));
-//        }
-//    }
+    @GetMapping("/all")
+    public ResponseEntity<ApiResponse> getCategories()
+    {
+        try {
+            List<Category> categoryList=categoryService.getAllCategories();
+            return ResponseEntity.ok(new ApiResponse("Found",categoryList));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse("Error",null));
+        }
+    }
+    @PostMapping("/add")
+    public ResponseEntity<ApiResponse>createCategory(@RequestBody Category c){
+        try {
+            Category category=categoryService.addCategory(c);
+            return ResponseEntity.ok(new ApiResponse("Success",category));
+        } catch (AlreadyExistException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponse(e.getMessage(),null));
+        }
+    }
 //    @GetMapping("/category/{id}/category")
 //    public ResponseEntity<ApiResponse>getCategoryById(@PathVariable Long id){
 //        try {

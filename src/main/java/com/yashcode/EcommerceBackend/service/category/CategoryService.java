@@ -1,11 +1,14 @@
 package com.yashcode.EcommerceBackend.service.category;
 
 import com.yashcode.EcommerceBackend.entity.Category;
+import com.yashcode.EcommerceBackend.exceptions.AlreadyExistException;
 import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
 import com.yashcode.EcommerceBackend.service.CategoryClient.CategoryClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -31,28 +34,27 @@ public class CategoryService implements ICategoryService {
         }
     }
 //
-//    @Override
-//    public List<Category> getAllCategories() {
-//        try{
-//            log.info("List of categories is returned");
-//            return categoryRepository.findAll();
-//        }
-//        catch(Exception e){
-//            log.error("There is no categories");
-//            throw new ResourceNotFoundException("There is no categories");
-//        }
-//
-//    }
-//
-//    @Override
-//    public Category addCategory(Category category) {
-//        return Optional.of(category).filter(c->!categoryRepository.existsByName(c.getName()))
-//                .map(categoryRepository::save)
-//                .orElseThrow(()->{
-//                    log.error("Category already exists");
-//                    return new AlreadyExistException(category.getName()+" Already exist");
-//                });
-//    }
+    @Override
+    public List<Category> getAllCategories() {
+        try{
+            log.info("List of categories is returned");
+            return cate.getAllCategories();
+        }
+        catch(Exception e){
+            log.error("There is no categories");
+            throw new ResourceNotFoundException("There is no categories");
+        }
+
+    }
+
+    @Override
+    public Category addCategory(Category category) {
+        if(cate.getCategoryByName(category.getName())!=null){
+            log.error("Category with given name already exists");
+            throw new AlreadyExistException(category.getName()+" already exists");
+        }
+        return cate.addCategory(category);
+    }
 //
 //    @Override
 //    public Category updateCategory(Category category, Long id) {

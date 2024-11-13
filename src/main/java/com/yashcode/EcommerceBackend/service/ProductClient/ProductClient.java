@@ -12,7 +12,6 @@ import java.util.List;
 @FeignClient(url="http://localhost:8082",value="Product-Client")
 public interface ProductClient {
 
-
     @GetMapping("/api/v1/products/all")
     List<Products>getAllProducts();
     @GetMapping("/api/v1/products/product/{productId}/product")
@@ -21,4 +20,10 @@ public interface ProductClient {
     List<Products>getProductByBrandAndName(@RequestParam String brandName, @RequestParam String productName);
     @PostMapping("/api/v1/products/add")
     Products addProduct(@RequestBody AddProductDTO addProductDTO);
+    @GetMapping("/api/v1/products/products/by/name")
+    Products getProductName(@RequestParam String name);
+    @GetMapping("/api/v1/products/products/by/category-and-name")
+    List<Products>getProductByCategoryBrandAndName(@RequestParam String category,@RequestParam String brandName);
+    @GetMapping("/api/v1/products/products/by/brand-name")
+    List<Products>getProductByBrandName(@RequestParam String brandName);
 }

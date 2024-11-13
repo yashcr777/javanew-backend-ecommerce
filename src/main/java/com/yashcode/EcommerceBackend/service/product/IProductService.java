@@ -17,10 +17,10 @@ public interface IProductService {
 //    Product updateProduct(ProductUpdateDTO product, Long productId);
     List<Products>getAllProducts();
 //    List<Product>getProductByCategory(String category);
-//    List<Product>getProductsByBrand(String brand);
-//    List<Product>getProductsByCategoryAndBrand(String category,String brand);
-//    List<Product>getProductsByName(String name);
-//    List<Product>getProductsByBrandAndName(String brand,String name);
+
+    List<Products> getProductByCategoryAndBrandName(String category,String brandName);
+    Products getProductsByName(String name);
+    List<Products>getProductsByBrandAndName(String brand,String name);
 //    Long countProductsByBrandAndName(String brand,String name);
 //    ProductDto convertToDo(Product product);
 //    List<ProductDto>getConvertedProducts(List<Product>products);
