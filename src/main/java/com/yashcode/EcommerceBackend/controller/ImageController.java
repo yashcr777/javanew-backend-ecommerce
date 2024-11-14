@@ -26,18 +26,18 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RestController
 @RequestMapping("${api.prefix}/images")
 public class ImageController {
+private final IImageService imageService;
 
-
-//    @PostMapping("/upload")
-//    public ResponseEntity<ApiResponse> saveImages(@RequestParam List<MultipartFile> files,@RequestParam Long productId)
-//    {
-//        try {
-//            List<ImageDto> images=imageService.saveImages(productId,files);
-//            return ResponseEntity.ok(new ApiResponse("Upload successful",images));
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse("Upload Failed!",e.getMessage()));
-//        }
-//    }
+    @PostMapping("/upload")
+    public ResponseEntity<ApiResponse> saveImages(@RequestParam List<MultipartFile> files,@RequestParam Long productId)
+    {
+        try {
+            List<ImageDto> images=imageService.saveImages(productId,files);
+            return ResponseEntity.ok(new ApiResponse("Upload successful",images));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse("Upload Failed!",e.getMessage()));
+        }
+    }
 //    @GetMapping("/image/download/{imageId}")
 //    public ResponseEntity<Resource>downloadImage(@PathVariable Long imageId) throws SQLException {
 //        Image image=imageService.getImageById(imageId);
