@@ -24,8 +24,8 @@ public interface IProductService {
 //    Long countProductsByBrandAndName(String brand,String name);
 //    ProductDto convertToDo(Product product);
 //    List<ProductDto>getConvertedProducts(List<Product>products);
-//    List<Product>sortByField(String field);
-//    List<Product>sortByFieldDesc(String field);
+    List<Products>sortByField(String field);
+    List<Products>sortByFieldDesc(String field);
 //    Page<Product> getProductByPagination(int offset, int pageSize);
 //    Page<Product> getProductByPaginationAndSorting(int offset, int pageSize,String field);
 

@@ -146,6 +146,14 @@ public class ProductService implements IProductService {
             throw new ResourceNotFoundException(e.getMessage());
         }
     }
+    @Override
+    public List<Products>sortByField(String field){
+        return pro.getProductsBySorting(field);
+    }
+    @Override
+    public List<Products>sortByFieldDesc(String field){
+        return pro.getProductsByDescSorting(field);
+    }
 }
 
 
@@ -206,14 +214,8 @@ public class ProductService implements IProductService {
 //    public List<ProductDto>getConvertedProducts(List<Product>products) {
 //        return products.stream().map(this::convertToDo).toList();
 //    }
-//    @Override
-//    public List<Product>sortByField(String field){
-//        return productRepository.findAll(Sort.by(Sort.Direction.ASC,field));
-//    }
-//    @Override
-//    public List<Product>sortByFieldDesc(String field){
-//        return productRepository.findAll((Sort.by(Sort.Direction.DESC,field)));
-//    }
+
+
 //    @Override
 //    public Page<Product> getProductByPagination(int offset, int pageSize){
 //        return productRepository.findAll(PageRequest.of(offset,pageSize));

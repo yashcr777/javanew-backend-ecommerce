@@ -26,4 +26,8 @@ public interface ProductClient {
     List<Products>getProductByCategoryBrandAndName(@RequestParam String category,@RequestParam String brandName);
     @GetMapping("/api/v1/products/products/by/brand-name")
     List<Products>getProductByBrandName(@RequestParam String brandName);
+    @GetMapping("/api/v1/products/sort/{field}")
+    List<Products>getProductsBySorting(@PathVariable String field);
+    @GetMapping("api/v1/products/sortdesc/{field}")
+    List<Products>getProductsByDescSorting(@PathVariable String field);
 }

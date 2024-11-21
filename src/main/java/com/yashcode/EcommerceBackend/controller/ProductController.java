@@ -150,14 +150,14 @@ public class ProductController {
 //            return ResponseEntity.ok(new ApiResponse(e.getMessage(),null));
 //        }
 //    }
-//    @GetMapping("/sort/{field}")
-//    public List<Product>sortProducts(@PathVariable String field){
-//        return productService.sortByField(field);
-//    }
-//    @GetMapping("/sortdesc/{field}")
-//    public List<Product>sortProductsByDesc(@PathVariable String field){
-//        return productService.sortByFieldDesc(field);
-//    }
+    @GetMapping("/sort/{field}")
+    public List<Products>sortProducts(@PathVariable String field){
+        return productService.sortByField(field);
+    }
+    @GetMapping("/sortdesc/{field}")
+    public List<Products>sortProductsByDesc(@PathVariable String field){
+        return productService.sortByFieldDesc(field);
+    }
 //    @GetMapping("/pagination/{offset}/{pageSize}")
 //    public List<Product> productPagination(@PathVariable int offset, @PathVariable int pageSize){
 //        return productService.getProductByPagination(offset,pageSize).getContent();
