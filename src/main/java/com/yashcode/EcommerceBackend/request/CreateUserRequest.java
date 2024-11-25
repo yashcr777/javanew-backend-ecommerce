@@ -16,6 +16,6 @@ public class CreateUserRequest {
     @NotBlank(message = "Email cannot be empty")
     private String email;
     @NotBlank(message = "Password cannot be empty")
-    @Size(min = 10, max = 10, message = "{Password must have length of ten}")
+    @Size(min = 10, max = 100, message = "{Password must have atleast a length of ten}")
     private String password;
 }

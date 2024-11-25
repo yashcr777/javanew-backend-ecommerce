@@ -40,15 +40,15 @@ public class CategoryController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponse(e.getMessage(),null));
         }
     }
-//    @GetMapping("/category/{id}/category")
-//    public ResponseEntity<ApiResponse>getCategoryById(@PathVariable Long id){
-//        try {
-//            Category category=categoryService.getCategoryById(id);
-//            return ResponseEntity.ok(new ApiResponse("Found",category));
-//        } catch (ResourceNotFoundException e) {
-//            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
-//        }
-//    }
+    @GetMapping("/{id}/category")
+    public ResponseEntity<ApiResponse>getCategoryById(@PathVariable Long id){
+        try {
+            Category category=categoryService.getCategoryById(id);
+            return ResponseEntity.ok(new ApiResponse("Found",category));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
+        }
+    }
     @GetMapping("/category/{name}/category")
     public ResponseEntity<ApiResponse> getCategoryByName(@PathVariable String name){
         try {
@@ -80,14 +80,14 @@ public class CategoryController {
 //            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
 //        }
 //    }
-//    @GetMapping("/sort/{field}")
-//    public List<Category>sortCategory(@PathVariable String field){
-//        return categoryService.sortByField(field);
-//    }
-//    @GetMapping("/sortdesc/{field}")
-//    public List<Category>sortCategoryByDesc(@PathVariable String field){
-//        return categoryService.sortByFieldDesc(field);
-//    }
+    @GetMapping("/sort/{field}")
+    public List<Category>sortCategory(@PathVariable String field){
+        return categoryService.sortByField(field);
+    }
+    @GetMapping("/sortdesc/{field}")
+    public List<Category>sortCategoryByDesc(@PathVariable String field){
+        return categoryService.sortByFieldDesc(field);
+    }
 //    @GetMapping("/pagination/{offset}/{pageSize}")
 //    public List<Category> categoryPagination(@PathVariable int offset, @PathVariable int pageSize){
 //        return categoryService.getCategoryByPagination(offset,pageSize).getContent();

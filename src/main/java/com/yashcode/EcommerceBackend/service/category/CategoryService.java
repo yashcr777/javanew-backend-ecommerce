@@ -16,13 +16,11 @@ import java.util.List;
 public class CategoryService implements ICategoryService {
     private final CategoryClient cate;
 
-//    @Override
-//    public Category getCategoryById(Long id) {
-//        return categoryRepository.findById(id).orElseThrow(()->{
-//            log.error("Category not found with given id");
-//            return new CategoryNotFoundException("Category Not Found");});
-//    }
-//
+    @Override
+    public Category getCategoryById(Long id) {
+        return cate.getCategoryById(id);
+    }
+
     @Override
     public Category getCategoryByName(String name) {
         try {
@@ -55,6 +53,15 @@ public class CategoryService implements ICategoryService {
         }
         return cate.addCategory(category);
     }
+
+    @Override
+    public List<Category>sortByField(String field){
+        return cate.getCategoriesBySorting(field);
+    }
+    @Override
+    public List<Category>sortByFieldDesc(String field){
+        return cate.getCategoriesByDescSorting(field);
+    }
 //
 //    @Override
 //    public Category updateCategory(Category category, Long id) {
@@ -78,14 +85,7 @@ public class CategoryService implements ICategoryService {
 //        });
 //    }
 //
-//    @Override
-//    public List<Category>sortByField(String field){
-//        return categoryRepository.findAll(Sort.by(Sort.Direction.ASC,field));
-//    }
-//    @Override
-//    public List<Category>sortByFieldDesc(String field){
-//        return categoryRepository.findAll((Sort.by(Sort.Direction.DESC,field)));
-//    }
+
 //    @Override
 //    public Page<Category> getCategoryByPagination(int offset, int pageSize){
 //        return categoryRepository.findAll(PageRequest.of(offset,pageSize));
