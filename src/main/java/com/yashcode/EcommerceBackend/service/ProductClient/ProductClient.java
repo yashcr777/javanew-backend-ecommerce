@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(url="http://localhost:8082",value="Product-Client")
+@FeignClient(name="PRODUCT-MICROSERVICE")
 public interface ProductClient {
 
     @GetMapping("/api/v1/products/all")

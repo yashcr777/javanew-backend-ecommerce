@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
-@FeignClient(url="http://localhost:8082",value="Category-Client")
+@FeignClient(name="PRODUCT-MICROSERVICE")
 public interface CategoryClient {
     @GetMapping("/api/v1/categories/category/{name}/categoryByName")
     Category getCategoryByName(@PathVariable String name);
