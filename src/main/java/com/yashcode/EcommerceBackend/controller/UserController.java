@@ -22,9 +22,9 @@ import java.util.List;
 @RequestMapping("${api.prefix}/users")
 public class UserController {
     private final IUserService userService;
-
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/{userId}/user")
+
     public ResponseEntity<ApiResponse>getUserById(@PathVariable Long userId){
         try {
             User user=userService.getUserById(userId);
@@ -34,6 +34,8 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
         }
     }
+
+
 
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
