@@ -77,7 +77,17 @@ public class ProductController {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
         }
     }
+    public ResponseEntity<ApiResponse>productServiceFallBackForId(String productId,Exception e){
+        Products p=new Products();
+        p.setId(1234L);
+        p.setBrand("Dummy T");
+        p.setName("Dummy");
+        p.setDescription("This is dummy product because service is down");
+        p.setInventory(0);
+        return ResponseEntity.status(TOO_MANY_REQUESTS).body(new ApiResponse("Service is down",p));
+    }
     @GetMapping("/product/{productId}/product")
+    @RateLimiter(name="productRateLimiterForId",fallbackMethod = "productServiceFallBackForId")
     public ResponseEntity<ApiResponse>getProductById(@PathVariable Long productId)
     {
         try {
