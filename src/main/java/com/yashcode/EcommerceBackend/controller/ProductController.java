@@ -144,7 +144,7 @@ public class ProductController {
             {
                 return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("No products with given category name and brand name",null));
             }
-//            List<ProductDto>convertedProducts=productService.getConvertedProducts(products);
+
             return ResponseEntity.ok(new ApiResponse("Success",products));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.ok(new ApiResponse(e.getMessage(),null));

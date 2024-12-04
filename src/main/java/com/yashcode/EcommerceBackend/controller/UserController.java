@@ -105,12 +105,12 @@ public class UserController {
     public List<User>sortUsersByDesc(@PathVariable String field){
         return userService.sortByFieldDesc(field);
     }
-    @GetMapping("/pagination/{offset}/{pageSize}")
-    public List<User> userPagination(@PathVariable int offset, @PathVariable int pageSize){
+    @GetMapping("/pagination")
+    public List<User> userPagination(@RequestParam(defaultValue = "0") int offset, @RequestParam(defaultValue = "10")  int pageSize){
         return userService.getUserByPagination(offset,pageSize).getContent();
     }
-    @GetMapping("/paginationAndSorting/{offset}/{pageSize}/{field}")
-    public List<User> userPaginationAndSorting(@PathVariable int offset, @PathVariable int pageSize,@PathVariable String field){
+    @GetMapping("/paginationAndSorting/{field}")
+    public List<User> userPaginationAndSorting(@RequestParam(defaultValue = "0") int offset, @RequestParam(defaultValue = "10")  int pageSize,@PathVariable String field){
         return userService.getUserByPaginationAndSorting(offset,pageSize,field).getContent();
     }
 }
