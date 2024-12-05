@@ -1,6 +1,7 @@
 package com.yashcode.EcommerceBackend.controller;
 
 import com.yashcode.EcommerceBackend.dto.UserDto;
+import com.yashcode.EcommerceBackend.entity.Products;
 import com.yashcode.EcommerceBackend.entity.User;
 import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
 import com.yashcode.EcommerceBackend.request.CreateUserRequest;
@@ -8,23 +9,28 @@ import com.yashcode.EcommerceBackend.request.ForgotPasswordRequest;
 import com.yashcode.EcommerceBackend.request.UserUpdateRequest;
 import com.yashcode.EcommerceBackend.response.ApiResponse;
 import com.yashcode.EcommerceBackend.service.user.IUserService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.TOO_MANY_REQUESTS;
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${api.prefix}/users")
 public class UserController {
     private final IUserService userService;
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/{userId}/user")
-
+    @RateLimiter(name="userRateLimiterForId",fallbackMethod = "userServiceFallBackForId")
     public ResponseEntity<ApiResponse>getUserById(@PathVariable Long userId){
         try {
             User user=userService.getUserById(userId);
@@ -34,12 +40,21 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
         }
     }
+    public ResponseEntity<ApiResponse>userServiceFallBackForId(Long userId,Exception e){
+        User user=new User();
+        user.setId(1234L);
+        user.setEmail("dummy@gmail.com");
+        user.setFirstName("Dummy");
+        user.setLastName("Agarwal");
+        return ResponseEntity.status(TOO_MANY_REQUESTS).body(new ApiResponse("Service is down",user));
+    }
 
 
 
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("all")
+    @RateLimiter(name="userRateLimiter",fallbackMethod = "userServiceFallBack")
     public ResponseEntity<ApiResponse>getAllUser(){
         try {
             List<User>users=userService.getAllUser();
@@ -47,6 +62,19 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
         }
+    }
+
+    public ResponseEntity<ApiResponse>userServiceFallBack(Exception e){
+
+        log.info("Fallback is executed because service is down: ",e.getMessage());
+        List<User>users=new ArrayList<>();
+        User user=new User();
+        user.setId(1234L);
+        user.setEmail("dummy@gmail.com");
+        user.setFirstName("Dummy");
+        user.setLastName("Agarwal");
+        users.add(user);
+        return ResponseEntity.status(TOO_MANY_REQUESTS).body(new ApiResponse("Service is down",users));
     }
 
     @PostMapping("/add")

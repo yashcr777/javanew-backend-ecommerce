@@ -53,3 +53,26 @@ resilience4j:
         limitRefreshPeriod: 4s
         limitForPeriod: 2
         timeoutDuration: 0s
+
+      categoryRateLimiter:
+        limitRefreshPeriod: 4s
+        limitForPeriod: 4
+        timeoutDuration: 0s
+
+      categoryRateLimiterForId:
+        limitRefreshPeriod: 4s
+        limitForPeriod: 2
+        timeoutDuration: 0s
+
+      userRateLimiter:
+        limitRefreshPeriod: 4s
+        limitForPeriod: 2
+        timeoutDuration: 0s
+
+      userRateLimiterForId:
+        limitRefreshPeriod: 4s
+        limitForPeriod: 2
+        timeoutDuration: 0s
+
+
+

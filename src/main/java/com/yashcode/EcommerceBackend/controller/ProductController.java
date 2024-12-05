@@ -56,7 +56,7 @@ public class ProductController {
 
     public ResponseEntity<ApiResponse>productServiceFallBack(Exception e){
 
-//        log.info("Fallback is executed because service is down: ",e.getMessage());
+        log.info("Fallback is executed because service is down: ",e.getMessage());
         List<Products>products=new ArrayList<>();
         Products p=new Products();
         p.setId(1234L);
@@ -77,15 +77,7 @@ public class ProductController {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
         }
     }
-    public ResponseEntity<ApiResponse>productServiceFallBackForId(String productId,Exception e){
-        Products p=new Products();
-        p.setId(1234L);
-        p.setBrand("Dummy T");
-        p.setName("Dummy");
-        p.setDescription("This is dummy product because service is down");
-        p.setInventory(0);
-        return ResponseEntity.status(TOO_MANY_REQUESTS).body(new ApiResponse("Service is down",p));
-    }
+
     @GetMapping("/product/{productId}/product")
     @RateLimiter(name="productRateLimiterForId",fallbackMethod = "productServiceFallBackForId")
     public ResponseEntity<ApiResponse>getProductById(@PathVariable Long productId)
@@ -98,11 +90,20 @@ public class ProductController {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
         }
     }
+    public ResponseEntity<ApiResponse>productServiceFallBackForId(Long productId,Exception e){
+        Products p=new Products();
+        p.setId(1234L);
+        p.setBrand("Dummy T");
+        p.setName("Dummy");
+        p.setDescription("This is dummy product because service is down");
+        p.setInventory(0);
+        return ResponseEntity.status(TOO_MANY_REQUESTS).body(new ApiResponse("Service is down",p));
+    }
 //    @PutMapping("/product/{productId}/update")
 //    public ResponseEntity<ApiResponse>updateProduct(@RequestBody ProductUpdateDTO updateDTO,@PathVariable Long productId)
 //    {
 //        try {
-//            Product product=productService.updateProduct(updateDTO,productId);
+//            Product prod=productService.updateProduct(updateDTO,productId);
 //            ProductDto dto=productService.convertToDo(product);
 //            return ResponseEntity.ok(new ApiResponse("success",dto));
 //        } catch (ResourceNotFoundException e) {
