@@ -2,25 +2,21 @@ package com.yashcode.EcommerceBackend.controller;
 
 
 import com.yashcode.EcommerceBackend.dto.ImageDto;
-import com.yashcode.EcommerceBackend.entity.Image;
-import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
+
 import com.yashcode.EcommerceBackend.response.ApiResponse;
 import com.yashcode.EcommerceBackend.service.image.IImageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
+
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.sql.SQLException;
+
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+
 
 @RequiredArgsConstructor
 @RestController

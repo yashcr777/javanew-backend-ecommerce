@@ -37,7 +37,7 @@ public class AddressController {
     }
     @GetMapping("/address/{userId}/user")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    public ResponseEntity<ApiResponse>getAddressByUserId(@RequestParam Long userId){
+    public ResponseEntity<ApiResponse>getAddressByUserId(@PathVariable Long userId){
         try {
             User user=userService.getAuthenticatedUser();
             List<Address>addresses=addressService.getAddressByUserId(userId);

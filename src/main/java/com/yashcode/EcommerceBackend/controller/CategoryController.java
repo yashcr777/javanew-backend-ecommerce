@@ -2,7 +2,6 @@ package com.yashcode.EcommerceBackend.controller;
 
 
 import com.yashcode.EcommerceBackend.entity.Category;
-import com.yashcode.EcommerceBackend.entity.Products;
 import com.yashcode.EcommerceBackend.exceptions.AlreadyExistException;
 import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
 import com.yashcode.EcommerceBackend.response.ApiResponse;
