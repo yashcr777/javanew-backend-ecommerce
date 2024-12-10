@@ -4,7 +4,7 @@ import com.yashcode.EcommerceBackend.Repository.RoleRepository;
 import com.yashcode.EcommerceBackend.Repository.UserRepository;
 
 
-import com.yashcode.EcommerceBackend.dto.UserDto;
+import com.yashcode.EcommerceBackend.entity.dto.UserDto;
 
 
 import com.yashcode.EcommerceBackend.entity.Role;

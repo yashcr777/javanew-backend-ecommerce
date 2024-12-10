@@ -1,10 +1,7 @@
 package com.yashcode.EcommerceBackend.service.product;
 
 
-import com.yashcode.EcommerceBackend.dto.AddProductDTO;
-import com.yashcode.EcommerceBackend.dto.ProductDto;
-import com.yashcode.EcommerceBackend.dto.ProductUpdateDTO;
-import com.yashcode.EcommerceBackend.entity.Product;
+import com.yashcode.EcommerceBackend.entity.dto.AddProductDTO;
 import com.yashcode.EcommerceBackend.entity.Products;
 import org.springframework.data.domain.Page;
 
@@ -26,7 +23,7 @@ public interface IProductService {
 //    List<ProductDto>getConvertedProducts(List<Product>products);
     List<Products>sortByField(String field);
     List<Products>sortByFieldDesc(String field);
-//    Page<Product> getProductByPagination(int offset, int pageSize);
-//    Page<Product> getProductByPaginationAndSorting(int offset, int pageSize,String field);
+    Page<Products> getProductByPagination(int offset, int pageSize);
+    Page<Products> getProductByPaginationAndSorting(int offset, int pageSize,String field);
 
 }

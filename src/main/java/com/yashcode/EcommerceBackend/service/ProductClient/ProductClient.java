@@ -2,9 +2,10 @@ package com.yashcode.EcommerceBackend.service.ProductClient;
 
 
 
-import com.yashcode.EcommerceBackend.dto.AddProductDTO;
+import com.yashcode.EcommerceBackend.entity.dto.AddProductDTO;
 import com.yashcode.EcommerceBackend.entity.Products;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,4 +31,8 @@ public interface ProductClient {
     List<Products>getProductsBySorting(@PathVariable String field);
     @GetMapping("api/v1/products/sortdesc/{field}")
     List<Products>getProductsByDescSorting(@PathVariable String field);
+    @GetMapping("/api/v1/products/pagination")
+    Page<Products>getProductsByPagination(@RequestParam(defaultValue = "0") int offset, @RequestParam(defaultValue = "10")  int pageSize);
+    @GetMapping("/api/v1/products/paginationAndSorting/{field}")
+    Page<Products>getProductsByPaginationAndSorting(@RequestParam(defaultValue = "0") int offset, @RequestParam(defaultValue = "10")  int pageSize,@PathVariable String field);
 }

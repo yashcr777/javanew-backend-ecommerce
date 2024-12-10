@@ -1,10 +1,7 @@
 package com.yashcode.EcommerceBackend.controller;
 
-import com.yashcode.EcommerceBackend.dto.AddProductDTO;
-import com.yashcode.EcommerceBackend.dto.ProductDto;
-import com.yashcode.EcommerceBackend.dto.ProductUpdateDTO;
-
 import com.yashcode.EcommerceBackend.entity.Product;
+import com.yashcode.EcommerceBackend.entity.dto.AddProductDTO;
 
 import com.yashcode.EcommerceBackend.entity.Products;
 import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
@@ -12,15 +9,12 @@ import com.yashcode.EcommerceBackend.response.ApiResponse;
 import com.yashcode.EcommerceBackend.service.ProductClient.ProductClient;
 import com.yashcode.EcommerceBackend.service.product.IProductService;
 
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
-import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -197,12 +191,12 @@ public class ProductController {
     public List<Products>sortProductsByDesc(@PathVariable String field){
         return productService.sortByFieldDesc(field);
     }
-//    @GetMapping("/pagination/{offset}/{pageSize}")
-//    public List<Product> productPagination(@PathVariable int offset, @PathVariable int pageSize){
-//        return productService.getProductByPagination(offset,pageSize).getContent();
-//    }
-//    @GetMapping("/paginationAndSorting/{offset}/{pageSize}/{field}")
-//    public List<Product> productPaginationAndSorting(@PathVariable int offset, @PathVariable int pageSize,@PathVariable String field){
-//        return productService.getProductByPaginationAndSorting(offset,pageSize,field).getContent();
-//    }
+    @GetMapping("/pagination")
+    public List<Products> productPagination(@RequestParam(defaultValue = "0") int offset, @RequestParam(defaultValue = "10")  int pageSize){
+        return productService.getProductByPagination(offset,pageSize).getContent();
+    }
+    @GetMapping("/paginationAndSorting/{field}")
+    public List<Products> productPaginationAndSorting(@RequestParam(defaultValue = "0") int offset, @RequestParam(defaultValue = "10")  int pageSize,@PathVariable String field){
+        return productService.getProductByPaginationAndSorting(offset,pageSize,field).getContent();
+    }
 }

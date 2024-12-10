@@ -1,7 +1,7 @@
 package com.yashcode.EcommerceBackend.service.order;
 
 import com.yashcode.EcommerceBackend.Repository.OrderRepository;
-import com.yashcode.EcommerceBackend.dto.OrderDto;
+import com.yashcode.EcommerceBackend.entity.dto.OrderDto;
 import com.yashcode.EcommerceBackend.entity.*;
 import com.yashcode.EcommerceBackend.enums.OrderStatus;
 import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;

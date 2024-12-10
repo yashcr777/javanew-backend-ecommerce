@@ -1,16 +1,11 @@
 package com.yashcode.EcommerceBackend.service.image;
 
-import com.yashcode.EcommerceBackend.dto.ImageDto;
-import com.yashcode.EcommerceBackend.entity.Image;
+import com.yashcode.EcommerceBackend.entity.dto.ImageDto;
 import com.yashcode.EcommerceBackend.service.ImageClient.ImageClient;
-import com.yashcode.EcommerceBackend.service.product.IProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import javax.sql.rowset.serial.SerialBlob;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 @Service
 @RequiredArgsConstructor

@@ -1,16 +1,11 @@
 package com.yashcode.EcommerceBackend.service.product;
 
 
-import com.yashcode.EcommerceBackend.dto.AddProductDTO;
-import com.yashcode.EcommerceBackend.dto.ImageDto;
-import com.yashcode.EcommerceBackend.dto.ProductDto;
-import com.yashcode.EcommerceBackend.dto.ProductUpdateDTO;
+import com.yashcode.EcommerceBackend.entity.dto.AddProductDTO;
 import com.yashcode.EcommerceBackend.entity.Category;
-import com.yashcode.EcommerceBackend.entity.Image;
 import com.yashcode.EcommerceBackend.entity.Product;
 import com.yashcode.EcommerceBackend.entity.Products;
 import com.yashcode.EcommerceBackend.exceptions.AlreadyExistException;
-import com.yashcode.EcommerceBackend.exceptions.ProductNotFoundException;
 import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
 import com.yashcode.EcommerceBackend.service.CategoryClient.CategoryClient;
 import com.yashcode.EcommerceBackend.service.ProductClient.ProductClient;
@@ -18,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -115,7 +108,9 @@ public class ProductService implements IProductService {
     @Override
     public List<Products> getAllProducts() {
         try {
-            return pro.getAllProducts();
+            List<Products> products = pro.getAllProducts();
+            log.info("Successfully retrieved all products. Total products: {}", products.size());
+            return products;
         } catch (ResourceNotFoundException e) {
             log.warn("There is no product present");
             throw new ResourceNotFoundException(e.getMessage());
@@ -153,6 +148,14 @@ public class ProductService implements IProductService {
     @Override
     public List<Products>sortByFieldDesc(String field){
         return pro.getProductsByDescSorting(field);
+    }
+    @Override
+    public Page<Products> getProductByPagination(int offset, int pageSize){
+        return pro.getProductsByPagination(offset,pageSize);
+    }
+    @Override
+    public Page<Products> getProductByPaginationAndSorting(int offset, int pageSize,String field){
+        return pro.getProductsByPaginationAndSorting(offset, pageSize, field);
     }
 }
 
@@ -216,12 +219,6 @@ public class ProductService implements IProductService {
 //    }
 
 
-//    @Override
-//    public Page<Product> getProductByPagination(int offset, int pageSize){
-//        return productRepository.findAll(PageRequest.of(offset,pageSize));
-//    }
-//    @Override
-//    public Page<Product> getProductByPaginationAndSorting(int offset, int pageSize,String field){
-//        return productRepository.findAll(PageRequest.of(offset,pageSize).withSort(Sort.by(Sort.Direction.DESC,field)));
-//    }
+
+
 //}

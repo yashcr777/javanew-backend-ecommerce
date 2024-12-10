@@ -6,6 +6,7 @@ import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
 import com.yashcode.EcommerceBackend.service.CategoryClient.CategoryClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -86,12 +87,12 @@ public class CategoryService implements ICategoryService {
 //    }
 //
 
-//    @Override
-//    public Page<Category> getCategoryByPagination(int offset, int pageSize){
-//        return categoryRepository.findAll(PageRequest.of(offset,pageSize));
-//    }
-//    @Override
-//    public Page<Category> getCategoryByPaginationAndSorting(int offset, int pageSize,String field){
-//        return categoryRepository.findAll(PageRequest.of(offset,pageSize).withSort(Sort.by(Sort.Direction.DESC,field)));
-//    }
+    @Override
+    public Page<Category> getCategoryByPagination(int offset, int pageSize){
+        return cate.getCategoryByPagination(offset,pageSize);
+    }
+    @Override
+    public Page<Category> getCategoryByPaginationAndSorting(int offset, int pageSize,String field){
+        return cate.getCategoryByPaginationAndField(offset,pageSize,field);
+    }
 }

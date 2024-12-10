@@ -4,9 +4,11 @@ package com.yashcode.EcommerceBackend.service.CategoryClient;
 import com.yashcode.EcommerceBackend.entity.Category;
 import com.yashcode.EcommerceBackend.entity.Products;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -24,4 +26,8 @@ public interface CategoryClient {
     List<Category>getCategoriesByDescSorting(@PathVariable String field);
     @GetMapping("api/v1/categories/category/{id}/category")
     Category getCategoryById(@PathVariable Long id);
+    @GetMapping("api/v1/categories/pagination")
+    Page<Category> getCategoryByPagination(@RequestParam int offset, @RequestParam int pageSize);
+    @GetMapping("api/v1/categories/paginationAndSorting/{field}")
+    Page<Category> getCategoryByPaginationAndField(@RequestParam int offset,@RequestParam int pageSize,@PathVariable String field);
 }
