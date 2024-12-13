@@ -6,7 +6,7 @@ import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
 import com.yashcode.EcommerceBackend.response.ApiResponse;
 import com.yashcode.EcommerceBackend.service.Cart.ICartItemService;
 import com.yashcode.EcommerceBackend.service.Cart.ICartService;
-import com.yashcode.EcommerceBackend.service.user.IUserService;
+import com.yashcode.EcommerceBackend.service.User.IUserService;
 import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

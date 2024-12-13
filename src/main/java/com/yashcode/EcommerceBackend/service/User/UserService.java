@@ -1,4 +1,4 @@
-package com.yashcode.EcommerceBackend.service.user;
+package com.yashcode.EcommerceBackend.service.User;
 
 import com.yashcode.EcommerceBackend.Repository.RoleRepository;
 import com.yashcode.EcommerceBackend.Repository.UserRepository;

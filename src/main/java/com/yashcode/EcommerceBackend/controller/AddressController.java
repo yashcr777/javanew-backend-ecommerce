@@ -7,7 +7,7 @@ import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
 import com.yashcode.EcommerceBackend.request.CreateAddressRequest;
 import com.yashcode.EcommerceBackend.response.ApiResponse;
 import com.yashcode.EcommerceBackend.service.Address.IAddressService;
-import com.yashcode.EcommerceBackend.service.user.IUserService;
+import com.yashcode.EcommerceBackend.service.User.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

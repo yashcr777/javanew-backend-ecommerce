@@ -8,7 +8,7 @@ import com.yashcode.EcommerceBackend.request.CreateUserRequest;
 import com.yashcode.EcommerceBackend.request.ForgotPasswordRequest;
 import com.yashcode.EcommerceBackend.request.UserUpdateRequest;
 import com.yashcode.EcommerceBackend.response.ApiResponse;
-import com.yashcode.EcommerceBackend.service.user.IUserService;
+import com.yashcode.EcommerceBackend.service.User.IUserService;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

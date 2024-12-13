@@ -1,4 +1,4 @@
-package com.yashcode.EcommerceBackend.service.image;
+package com.yashcode.EcommerceBackend.service.Image;
 
 import com.yashcode.EcommerceBackend.entity.dto.ImageDto;
 import org.springframework.web.multipart.MultipartFile;

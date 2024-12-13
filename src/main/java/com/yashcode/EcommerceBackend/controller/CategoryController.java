@@ -5,7 +5,7 @@ import com.yashcode.EcommerceBackend.entity.Category;
 import com.yashcode.EcommerceBackend.exceptions.AlreadyExistException;
 import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
 import com.yashcode.EcommerceBackend.response.ApiResponse;
-import com.yashcode.EcommerceBackend.service.category.ICategoryService;
+import com.yashcode.EcommerceBackend.service.Category.ICategoryService;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

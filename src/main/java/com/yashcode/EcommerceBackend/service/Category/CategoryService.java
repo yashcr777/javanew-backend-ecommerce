@@ -1,4 +1,4 @@
-package com.yashcode.EcommerceBackend.service.category;
+package com.yashcode.EcommerceBackend.service.Category;
 
 import com.yashcode.EcommerceBackend.entity.Category;
 import com.yashcode.EcommerceBackend.exceptions.AlreadyExistException;
@@ -63,29 +63,7 @@ public class CategoryService implements ICategoryService {
     public List<Category>sortByFieldDesc(String field){
         return cate.getCategoriesByDescSorting(field);
     }
-//
-//    @Override
-//    public Category updateCategory(Category category, Long id) {
-//        return Optional.ofNullable(getCategoryById(id)).map(oldCategory->{
-//            oldCategory.setName(category.getName());
-//            log.info("Category Updated Successfully");
-//            return categoryRepository.save(oldCategory);
-//        }).orElseThrow(()->{
-//            log.error("Category Updation failed");
-//            return new CategoryNotFoundException("Category not Found");
-//        });
-//    }
-//
-//
-//
-//    @Override
-//    public void deleteCategoryById(Long id) {
-//        categoryRepository.findById(id).ifPresentOrElse(categoryRepository::delete,()->{
-//            log.error("Deletion with given id not possible");
-//            throw new CategoryNotFoundException("Category Not Found!");
-//        });
-//    }
-//
+
 
     @Override
     public Page<Category> getCategoryByPagination(int offset, int pageSize){

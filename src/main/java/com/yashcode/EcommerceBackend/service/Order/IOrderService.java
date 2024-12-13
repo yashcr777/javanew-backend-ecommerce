@@ -1,4 +1,4 @@
-package com.yashcode.EcommerceBackend.service.order;
+package com.yashcode.EcommerceBackend.service.Order;
 
 import com.yashcode.EcommerceBackend.entity.dto.OrderDto;
 import com.yashcode.EcommerceBackend.entity.Order;

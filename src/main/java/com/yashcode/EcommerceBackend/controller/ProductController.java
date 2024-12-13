@@ -1,25 +1,18 @@
 package com.yashcode.EcommerceBackend.controller;
-
-import com.yashcode.EcommerceBackend.entity.Product;
 import com.yashcode.EcommerceBackend.entity.dto.AddProductDTO;
-
 import com.yashcode.EcommerceBackend.entity.Products;
 import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
 import com.yashcode.EcommerceBackend.response.ApiResponse;
 import com.yashcode.EcommerceBackend.service.ProductClient.ProductClient;
-import com.yashcode.EcommerceBackend.service.product.IProductService;
-
+import com.yashcode.EcommerceBackend.service.Product.IProductService;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.RequiredArgsConstructor;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.springframework.http.HttpStatus.*;
 @Slf4j
 @RestController
@@ -50,7 +43,6 @@ public class ProductController {
 
     public ResponseEntity<ApiResponse>productServiceFallBack(Exception e){
 
-        log.info("Fallback is executed because service is down: ",e.getMessage());
         List<Products>products=new ArrayList<>();
         Products p=new Products();
         p.setId(1234L);
@@ -93,28 +85,7 @@ public class ProductController {
         p.setInventory(0);
         return ResponseEntity.status(TOO_MANY_REQUESTS).body(new ApiResponse("Service is down",p));
     }
-//    @PutMapping("/product/{productId}/update")
-//    public ResponseEntity<ApiResponse>updateProduct(@RequestBody ProductUpdateDTO updateDTO,@PathVariable Long productId)
-//    {
-//        try {
-//            Product prod=productService.updateProduct(updateDTO,productId);
-//            ProductDto dto=productService.convertToDo(product);
-//            return ResponseEntity.ok(new ApiResponse("success",dto));
-//        } catch (ResourceNotFoundException e) {
-//            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
-//        }
-//    }
-//
-//    @DeleteMapping("/product/{productId}/delete")
-//    public ResponseEntity<ApiResponse>deleteProduct(@PathVariable Long productId)
-//    {
-//        try {
-//            productService.deleteProductById(productId);
-//            return ResponseEntity.ok(new ApiResponse("success",productId));
-//        } catch (ResourceNotFoundException e) {
-//            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
-//        }
-//    }
+
     @GetMapping("/products/by/brand-and-name")
     public ResponseEntity<ApiResponse>getProductsByBrandAndName(@RequestParam String brandName,@RequestParam String productName)
     {
@@ -124,8 +95,7 @@ public class ProductController {
             {
                 return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("No products with this brand name and product name",null));
             }
-//            List<ProductDto>convertedProducts=productService.getConvertedProducts(products);
-            return ResponseEntity.ok(new ApiResponse("Success",products));
+            return ResponseEntity.ok(new ApiResponse("success",products));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.ok(new ApiResponse(e.getMessage(),null));
         }
@@ -140,7 +110,7 @@ public class ProductController {
                 return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("No products with given category name and brand name",null));
             }
 
-            return ResponseEntity.ok(new ApiResponse("Success",products));
+            return ResponseEntity.ok(new ApiResponse("success",products));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.ok(new ApiResponse(e.getMessage(),null));
         }
@@ -168,7 +138,7 @@ public class ProductController {
             if(products.isEmpty()){
                 return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("No products with given brand name",null));
             }
-            return ResponseEntity.ok(new ApiResponse("Success",products));
+            return ResponseEntity.ok(new ApiResponse("success",products));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.ok(new ApiResponse(e.getMessage(),null));
         }
@@ -200,3 +170,62 @@ public class ProductController {
         return productService.getProductByPaginationAndSorting(offset,pageSize,field).getContent();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    @PutMapping("/product/{productId}/update")
+//    public ResponseEntity<ApiResponse>updateProduct(@RequestBody ProductUpdateDTO updateDTO,@PathVariable Long productId)
+//    {
+//        try {
+//            Product prod=productService.updateProduct(updateDTO,productId);
+//            ProductDto dto=productService.convertToDo(product);
+//            return ResponseEntity.ok(new ApiResponse("success",dto));
+//        } catch (ResourceNotFoundException e) {
+//            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
+//        }
+//    }
+//
+//    @DeleteMapping("/product/{productId}/delete")
+//    public ResponseEntity<ApiResponse>deleteProduct(@PathVariable Long productId)
+//    {
+//        try {
+//            productService.deleteProductById(productId);
+//            return ResponseEntity.ok(new ApiResponse("success",productId));
+//        } catch (ResourceNotFoundException e) {
+//            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
+//        }
+//    }

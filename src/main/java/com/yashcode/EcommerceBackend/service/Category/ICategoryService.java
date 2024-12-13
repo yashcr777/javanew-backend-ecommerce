@@ -1,4 +1,4 @@
-package com.yashcode.EcommerceBackend.service.category;
+package com.yashcode.EcommerceBackend.service.Category;
 
 import com.yashcode.EcommerceBackend.entity.Category;
 import org.springframework.data.domain.Page;

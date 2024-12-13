@@ -4,7 +4,7 @@ package com.yashcode.EcommerceBackend.controller;
 import com.yashcode.EcommerceBackend.entity.dto.ImageDto;
 
 import com.yashcode.EcommerceBackend.response.ApiResponse;
-import com.yashcode.EcommerceBackend.service.image.IImageService;
+import com.yashcode.EcommerceBackend.service.Image.IImageService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;

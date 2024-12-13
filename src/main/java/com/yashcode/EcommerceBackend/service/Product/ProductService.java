@@ -1,4 +1,4 @@
-package com.yashcode.EcommerceBackend.service.product;
+package com.yashcode.EcommerceBackend.service.Product;
 
 
 import com.yashcode.EcommerceBackend.entity.dto.AddProductDTO;
@@ -158,6 +158,62 @@ public class ProductService implements IProductService {
         return pro.getProductsByPaginationAndSorting(offset, pageSize, field);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

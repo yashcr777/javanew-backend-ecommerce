@@ -1,4 +1,4 @@
-package com.yashcode.EcommerceBackend.service.order;
+package com.yashcode.EcommerceBackend.service.Order;
 
 import com.yashcode.EcommerceBackend.Repository.OrderRepository;
 import com.yashcode.EcommerceBackend.entity.dto.OrderDto;
@@ -6,7 +6,7 @@ import com.yashcode.EcommerceBackend.entity.*;
 import com.yashcode.EcommerceBackend.enums.OrderStatus;
 import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
 import com.yashcode.EcommerceBackend.service.Cart.CartService;
-import com.yashcode.EcommerceBackend.service.user.IUserService;
+import com.yashcode.EcommerceBackend.service.User.IUserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

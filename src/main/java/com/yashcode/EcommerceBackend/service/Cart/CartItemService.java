@@ -4,11 +4,9 @@ import com.yashcode.EcommerceBackend.Repository.CartItemRepository;
 import com.yashcode.EcommerceBackend.Repository.CartRepository;
 import com.yashcode.EcommerceBackend.entity.Cart;
 import com.yashcode.EcommerceBackend.entity.CartItem;
-import com.yashcode.EcommerceBackend.entity.Product;
 import com.yashcode.EcommerceBackend.entity.Products;
 import com.yashcode.EcommerceBackend.exceptions.ResourceNotFoundException;
 import com.yashcode.EcommerceBackend.service.ProductClient.ProductClient;
-import com.yashcode.EcommerceBackend.service.product.IProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
